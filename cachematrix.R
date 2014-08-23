@@ -4,9 +4,15 @@
 ## Caches the Inverse of a Received Matrix
 
 makeCacheMatrix <- function(x = matrix()) {
+         
+    set <- function(y) {
+        x <<- y
+        x_Invr <<- NULL
+    }
     
-    CX <<- x
-    CX_inv <<- Solve(x)
+    set(x)
+    x_Invr <<- solve(x)
+    
 
 }
 
@@ -15,5 +21,14 @@ makeCacheMatrix <- function(x = matrix()) {
 ## Retrieve the Cached Inverse if Available
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+    
+    if(!is.null(x_Invr)) {
+        message('getting cached data')
+        return(x_Invr)
+    }
+    
+    x_inv <- solve(x)
+    message('calculate inverse data')
+    x_inv
+       
 }
